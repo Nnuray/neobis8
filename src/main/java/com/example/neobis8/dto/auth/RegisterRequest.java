@@ -18,4 +18,15 @@ public class RegisterRequest {
     @JsonIgnore
     private String passwordConfirm;
 
+    public String getUsername() {
+        return null;
+    }
+
+    public String getFirst_name() {
+        return null;
+    }
+
+    public String getLast_name() {
+        return null;
+    }
 }

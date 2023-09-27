@@ -13,4 +13,8 @@ public class AuthenticationRequest {
     private String login;
     @JsonIgnore
     private String password;
+
+    public Object getEmail() {
+        return null;
+    }
 }

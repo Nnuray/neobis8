@@ -3,17 +3,19 @@ package com.example.neobis8.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.management.relation.Role;
+
 @Entity
-@Table(name = "Customers")
+@Table(name = "Users")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Customer {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerId;
+    private int userId;
     private String email;
     private String username;
     private String password;
@@ -23,4 +25,6 @@ public class Customer {
     private String firstName;
     private String phoneNumber;
     private java.util.Date dateOfBirth;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
