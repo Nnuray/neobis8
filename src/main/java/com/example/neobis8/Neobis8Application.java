@@ -9,6 +9,7 @@ public class Neobis8Application {
     public static void main(String[] args) {
         SpringApplication.run(Neobis8Application.class, args);
         System.out.println("Hello");
+        System.out.println("this is my market");
     }
 
 
