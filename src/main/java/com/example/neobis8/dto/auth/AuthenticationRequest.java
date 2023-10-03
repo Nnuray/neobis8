@@ -10,11 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthenticationRequest {
-    private String login;
+    private String email;
     @JsonIgnore
     private String password;
 
-    public Object getEmail() {
-        return null;
-    }
 }
