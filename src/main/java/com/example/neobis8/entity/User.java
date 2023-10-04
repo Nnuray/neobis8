@@ -6,8 +6,6 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.management.relation.Role;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,7 +28,6 @@ public class User implements UserDetails {
     private String lastName;
     private String firstName;
     private String phoneNumber;
-    private java.util.Date dateOfBirth;
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -68,4 +65,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
