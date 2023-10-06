@@ -22,6 +22,7 @@ public class User implements UserDetails {
     private int userId;
     private String email;
     private String username;
+    @Column(name = "password")
     private String password;
     @Lob
     private byte[] profilePhoto;

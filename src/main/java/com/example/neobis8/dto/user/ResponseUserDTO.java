@@ -32,15 +32,15 @@ public class ResponseUserDTO {
 
     public static ResponseUserDTO toResponseUserDTO(User user) {
         return ResponseUserDTO.builder()
-                .userId(user.getUserId()) // Установите значение поля userId на основе User
-                .email(user.getEmail()) // Установите значение поля email на основе User
-                .username(user.getUsername()) // Установите значение поля username на основе User
-                .password(user.getPassword()) // Установите значение поля password на основе User
-                .profilePhoto(user.getProfilePhoto()) // Установите значение поля profilePhoto на основе User
-                .lastName(user.getLastName()) // Установите значение поля lastName на основе User
-                .firstName(user.getFirstName()) // Установите значение поля firstName на основе User
-                .phoneNumber(user.getPhoneNumber()) // Установите значение поля phoneNumber на основе User
-                .role(user.getRole()) // Установите значение поля role на основе User
+                .userId(user.getUserId())
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .profilePhoto(user.getProfilePhoto())
+                .lastName(user.getLastName())
+                .firstName(user.getFirstName())
+                .phoneNumber(user.getPhoneNumber())
+                .role(user.getRole())
                 .build();
     }
     public static List<ResponseUserDTO> toResponseUserDTOs(List<User> users){

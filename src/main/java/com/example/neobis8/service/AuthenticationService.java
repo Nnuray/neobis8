@@ -9,6 +9,4 @@ public interface AuthenticationService {
     AuthResponseDTO register(RequestUserDTO userDTO);
 
     AuthResponseDTO authenticate(AuthRequestDTO authRequestDTO);
-
-    AuthResponseDTO login(AuthRequestDTO authRequestDTO);
 }

@@ -10,7 +10,5 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> { // идентификатор пользовательского класа
 
-    Optional<User> findByEmail(String email);
-
-    boolean existsByEmail(String email);
+    Optional<User> findByUsername(String username);
 }

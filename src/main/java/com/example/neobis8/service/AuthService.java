@@ -34,12 +34,7 @@ public class AuthService implements AuthenticationService {
 
     @Override
     public AuthResponseDTO authenticate(AuthRequestDTO authRequestDTO) {
-        return null;
-    }
-
-    @Override
-    public AuthResponseDTO login(AuthRequestDTO authRequestDTO) {
-        User user = userRepository.findByEmail(authRequestDTO.getUsername())
+        User user = userRepository.findByUsername(authRequestDTO.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
 
         if (!passwordEncoder.matches(authRequestDTO.getPassword(), user.getPassword())) {

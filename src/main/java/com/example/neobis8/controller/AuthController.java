@@ -2,9 +2,10 @@ package com.example.neobis8.controller;
 
 import com.example.neobis8.dto.auth.AuthRequestDTO;
 import com.example.neobis8.dto.auth.AuthResponseDTO;
+import com.example.neobis8.dto.auth.PasswordValidator;
 import com.example.neobis8.dto.user.RequestUserDTO;
+import com.example.neobis8.exception.PasswordValidationException;
 import com.example.neobis8.service.AuthenticationService;
-import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +24,13 @@ public class AuthController {
 
     @PostMapping("/register")
     public AuthResponseDTO register(@Valid @RequestBody RequestUserDTO userDTO) {
+        if (!PasswordValidator.isValidPassword(userDTO.getPassword())){
+            throw new PasswordValidationException("Invalid password");
+        }
         return authenticationService.register(userDTO);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/authenticate")
     public AuthResponseDTO authenticate(@RequestBody AuthRequestDTO authRequestDTO) {
         return authenticationService.authenticate(authRequestDTO);
     }
