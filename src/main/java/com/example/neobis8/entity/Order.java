@@ -18,5 +18,8 @@ public class Order {
     private int productId;
     private java.util.Date date;
     private int quantity;
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
 
 }

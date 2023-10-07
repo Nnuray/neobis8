@@ -20,4 +20,7 @@ public class Product {
     private byte[] photo;
     private String shortDesc;
     private String longDesc;
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
 }
