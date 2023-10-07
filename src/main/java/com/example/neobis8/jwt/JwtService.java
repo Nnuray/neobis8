@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,10 @@ import java.util.function.Function;
 @Service
 
 public class JwtService {
-    private static final String SECRET_KEY = "j5GSGOShKWI/xZjwnYoUTGnA7qQpdfF+VjAZ6IOVs1b64e0oNQ6dcLnGVgslH+SrjIvCEmUMUC+NN5SGSWYWT8+wmI+Ced8A4mre3bkM4E6g3iE8wutA4qVnL32QHtARl9rmoJEYGOBak6bY1lt1DpnS/W3f4D+jDG4yhclAq32A1H6+gC7P6znv/OTT8AWnbBwOvJGsj1tdykKDVj1z60UlL3Ksc2ACHV+sUPVDJk9Bs4VgUV4wqn2NSlMaPsW6osXcq7f2rcKgxbN7FgmoYsT3S1jSnMGiHk966rUw/wA2fgssK3FT+62W5fqL1HV+52wZ6wTeXZAFkyBbRckf3VmIiPkadEIjelm+IDbbIiY=\\n";
+    private final Key secretKey;
+    public JwtService(){
+        this.secretKey=generateRandomKey();
+    }
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
@@ -42,17 +46,18 @@ public class JwtService {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000*60*24))  //24hours
-                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+                .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenValid(token);
+        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
-    private boolean isTokenValid(String token) {
-        return extractExpiration(token).before(new Date());
+    private boolean isTokenExpired(String token) {
+        final Date expirationDate = extractExpiration(token);
+        return expirationDate.before(new Date());
     }
 
     private Date extractExpiration(String token) {
@@ -63,14 +68,16 @@ public class JwtService {
     private Claims extractAllClaims(String token) {
         return Jwts
                 .parserBuilder()
-                .setSigningKey(getSignInKey())
+                .setSigningKey(secretKey)
                 .build()
                 .parseClaimsJwt(token)
                 .getBody();
     }
 
-    private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+    private Key generateRandomKey() {
+        byte[] keyBytes = new byte[32];
+        SecureRandom secureRandom = new SecureRandom();
+        secureRandom.nextBytes(keyBytes);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

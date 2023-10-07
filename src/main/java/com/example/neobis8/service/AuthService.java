@@ -23,7 +23,7 @@ public class AuthService implements AuthenticationService {
     @Override
     public AuthResponseDTO register(RequestUserDTO requestUserDTO) {
         User newUser = new User();
-        newUser.setEmail(requestUserDTO.getEmail());
+        newUser.setEmail(requestUserDTO.getUsername());
         newUser.setPassword(passwordEncoder.encode(requestUserDTO.getPassword()));
         userRepository.save(newUser);
 
