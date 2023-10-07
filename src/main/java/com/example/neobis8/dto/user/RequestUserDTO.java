@@ -15,7 +15,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RequestUserDTO {
     @Email
-    String email;
+    String username;
     String password;
 
     @JsonProperty("confirm_password")
