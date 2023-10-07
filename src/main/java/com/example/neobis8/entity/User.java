@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -31,6 +32,7 @@ public class User implements UserDetails {
     private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private UserRole role;
+    private int id;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -67,4 +69,15 @@ public class User implements UserDetails {
         return true;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Collection<Object> getRoles() {
+        return Collections.singleton(UserRole.CUSTOMER);
+    }
 }

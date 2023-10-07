@@ -10,4 +10,22 @@ public class ProductRequestDTO {
     private String shortDesc;
     private String longDesc;
     private int categoryId;
+
+    public String getName() {
+        return name;
+    }
+    public String getShortDesc(){
+        return shortDesc;
+    }
+    public String getLongDesc(){
+        return longDesc;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public byte[] getPhoto() {
+        return new byte[0];
+    }
 }

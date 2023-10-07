@@ -3,6 +3,8 @@ package com.example.neobis8.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "Orders")
 @Getter
@@ -22,4 +24,6 @@ public class Order {
     @JoinColumn(name = "productId")
     private Product product;
 
+    public void setOrderDate(LocalDateTime now) {
+    }
 }
